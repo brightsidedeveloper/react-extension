@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Tim is Goated",
+  "version": "1.0",
+  "description": "With the Sauce!",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "icon.png"
+  },
+  "permissions": ["storage", "activeTab", "scripting"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["injection.js"]
+    }
+  ]
+}
