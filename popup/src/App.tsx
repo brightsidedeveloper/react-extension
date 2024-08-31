@@ -1,6 +1,5 @@
 import { wetToast } from 'bsdweb'
 import send from './api/send'
-import DropDown from './components/ui/DropDown'
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 import { ThemeToggle } from './components/ui/ThemeToggle'
 import Accordion from './components/ui/Accordion'
@@ -21,12 +20,10 @@ export default function App() {
           <div className="w-fit flex items-center gap-3">
             <ThemeToggle />
 
-            <DropDown>
-              <Avatar className="size-6 rounded-full overflow-hidden">
-                <AvatarImage src="https://github.com/brightsidedeveloper.png" alt="name" />
-                <AvatarFallback>NAME</AvatarFallback>
-              </Avatar>
-            </DropDown>
+            <Avatar className="size-6 rounded-full overflow-hidden">
+              <AvatarImage src="https://github.com/brightsidedeveloper.png" alt="name" />
+              <AvatarFallback>NAME</AvatarFallback>
+            </Avatar>
           </div>
         </div>
       </header>
@@ -34,7 +31,7 @@ export default function App() {
         <div className="p-8 rounded-3xl border bg-card shadow-md dark:shadow-xl w-full max-w-[600px]">
           <h3 className="text-3xl @md:text-5xl @2xl:text-7xl pb-5">Enjoy Coding!</h3>
           <div className="flex items-center gap-4">
-            <p className="text-sm">You can even run code on the current tab!</p>
+            <p className="text-sm">You can even run code in active tab!</p>
             <Button onClick={handleButtonClick}>Log</Button>
           </div>
         </div>

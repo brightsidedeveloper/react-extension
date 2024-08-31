@@ -15,7 +15,7 @@ chrome.runtime.onMessage.addListener(
   }
 )
 
-export default function on(event: string, listener: (payload: any) => void) {
+function on(event: string, listener: (payload: any) => void) {
   if (!listeners[event]) {
     listeners[event] = []
   }
