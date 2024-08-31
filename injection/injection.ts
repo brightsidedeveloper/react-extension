@@ -1,8 +1,29 @@
-// example.ts
+type Listeners = {
+  [key: string]: ((payload: any) => void)[]
+}
 
-chrome.runtime.onMessage.addListener((request: any, sender: chrome.runtime.MessageSender, sendResponse: (response?: any) => void) => {
-  if (request.action === 'executeCode') {
-    const result = eval(request.code) // Example: Executing the code from the popup
-    sendResponse({ result: result })
+const listeners: Listeners = {}
+
+chrome.runtime.onMessage.addListener(
+  (request: { event: string; payload: any }, _: chrome.runtime.MessageSender, sendResponse: (response?: any) => void) => {
+    const { event, payload } = request
+    if (!listeners[event]) {
+      return sendResponse('No listener found')
+    }
+    listeners[event].forEach((listener) => listener(payload))
+    sendResponse(`Ran ${listeners[event].length} listener${listeners[event].length === 1 ? '' : 's'}`)
   }
+)
+
+export default function on(event: string, listener: (payload: any) => void) {
+  if (!listeners[event]) {
+    listeners[event] = []
+  }
+  listeners[event].push(listener)
+}
+
+on('log', (payload) => {
+  console.log(payload)
 })
+
+console.log('Injection script loaded!')

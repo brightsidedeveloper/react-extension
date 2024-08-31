@@ -7,7 +7,7 @@
     "default_popup": "index.html",
     "default_icon": "icon.png"
   },
-  "permissions": ["storage", "activeTab", "scripting"],
+  "permissions": ["activeTab", "scripting", "tabs", "storage"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
