@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url'
 
 // Create a function for flashy logging
 const logFlashy = (message: string) => {
-  console.log(chalk.bgMagenta.bold(message))
+  console.log(chalk.magentaBright.bold(message))
 }
 
 const logSuccess = (message: string) => {
@@ -29,8 +29,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const popupFolder = join(__dirname, 'popup')
 const injectionFolder = join(__dirname, 'injection')
 const distPopupFolder = join(popupFolder, 'dist')
+const distInjectionFolder = join(injectionFolder, 'dist')
 const extensionFolder = join(__dirname, 'extension')
 const manifestFilePath = join(__dirname, 'manifest.json')
+const iconFilePath = join(__dirname, 'icon.png')
 
 // Step 1: Clear all files in the 'extension' folder
 logFlashy('Clearing all files in the extension folder...')
@@ -39,6 +41,9 @@ fsExtra.emptyDirSync(extensionFolder)
 // Step 2: Copy 'manifest.json' from the root to 'extension/manifest.json'
 logFlashy('Copying manifest.json to the extension folder...')
 fsExtra.copySync(manifestFilePath, join(extensionFolder, 'manifest.json'), { overwrite: true })
+
+logFlashy('Copying icon.png to the extension folder...')
+fsExtra.copySync(iconFilePath, join(extensionFolder, 'icon.png'), { overwrite: true })
 
 // Step 3: Run 'npm run build' in the 'popup' folder
 logFlashy('Running npm run build in the popup folder...')
@@ -53,7 +58,7 @@ logFlashy('Running npm run build in the injection folder...')
 execSync('npm run build', { cwd: injectionFolder, stdio: 'inherit' })
 
 // Step 6: Copy the built 'injection.js' to the 'extension' folder
-const injectionJsPath = join(injectionFolder, 'injection.js')
+const injectionJsPath = join(distInjectionFolder, 'injection.js')
 const targetInjectionJsPath = join(extensionFolder, 'injection.js')
 logFlashy('Copying injection.js to the extension folder...')
 fsExtra.copySync(injectionJsPath, targetInjectionJsPath, { overwrite: true })

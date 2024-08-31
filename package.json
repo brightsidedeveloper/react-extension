@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "yuh": "npx tsx pockets.ts"
+    "build": "npx tsx build.ts",
+    "popup": "npx tsx popup.ts"
   },
   "keywords": [],
   "author": "",
